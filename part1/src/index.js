@@ -24,23 +24,48 @@ const Button = ({ handleClick, title }) => <button onClick={handleClick}>{title}
 
 
 
-const App = () => {
-  const [ counter, setCounter ] = useState(0)
+// const App = () => {
+//   const [ counter, setCounter ] = useState(0)
 
-  const increaseByOne = () => {setCounter(counter + 1)}
-  const decreaseByOne = () => {setCounter(counter - 1)}
-  const setToOne = () => {setCounter(0)}
+//   const increaseByOne = () => {setCounter(counter + 1)}
+//   const decreaseByOne = () => {setCounter(counter - 1)}
+//   const setToOne = () => {setCounter(0)}
+
+
+//   return (
+//     <div>
+//       <Display counter={counter} />
+//       <Button handleClick={increaseByOne} title='PLUS' />
+//       <Button handleClick={decreaseByOne} title='SUB' />
+//       <Button handleClick={setToOne} title='ZERO' />
+//     </div>
+//   )
+// }
+
+const App = () => {
+  const [ clicks, setClicks ] = useState({
+    left : 0,
+    right :0
+  })
+
+  const handleLeftClick = () => setClicks({...clicks, left : left + 1})
+  const handleRightClick = () => setClicks({...clicks, right : right + 1})
 
 
   return (
     <div>
-      <Display counter={counter} />
-      <Button handleClick={increaseByOne} title='PLUS' />
-      <Button handleClick={decreaseByOne} title='SUB' />
-      <Button handleClick={setToOne} title='ZERO' />
+      {left}
+      <button onClick={handleLeftClick}>
+        left
+      </button>
+      <button onClick={handleRightClick}>
+        right
+      </button>
+      {right}
     </div>
   )
 }
+
 
 
 let counter = 1

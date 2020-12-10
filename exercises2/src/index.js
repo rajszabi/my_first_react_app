@@ -6,6 +6,8 @@ const Display = ({ title }) => <h1>{title}</h1>
 
 const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
 
+const ShowStat = ({ text, count }) => <p>{text} {count}</p>
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -19,9 +21,12 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} text={'Neutral'} />
       <Button handleClick={() => setBad(bad + 1)} text={'Bad'} />
       <Display title='statistics' />
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
+      <ShowStat text='good' count={good} />
+      <ShowStat text='neutral' count={neutral} />
+      <ShowStat text='bad' count={bad} />
+      <ShowStat text='all' count={good + neutral + bad} />
+      <ShowStat text='avarage' count={Math.abs(good - bad)/(good + neutral + bad)} />
+      <p>positive {good/(good+neutral+bad)}</p>
     </div>
   )
 }

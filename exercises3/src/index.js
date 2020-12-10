@@ -1,6 +1,35 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+import './index.css'
+
+const Display = ({ title }) => <h1>{title}</h1>
+
+const Button = ({ handleClick, text }) => <button onClick={handleClick}>{text}</button>
+
+const MostVotes = ({ anecdotes, points }) => {
+  var max = 0
+  var i = 0
+
+  for (const [index, value] of points.entries()) {
+    console.log()
+    if (value > max) {
+      max = value
+      i = index
+    }
+  }
+
+  console.log(max, i)
+
+  return (
+    <div>
+      <p>{anecdotes[i]}</p>
+      <p>has {max} votes</p>
+    </div>
+  )
+
+}
+
 const App = (props) => {
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0))
@@ -13,14 +42,19 @@ const App = (props) => {
 
   return (
     <div>
+      <Display title='Anecdote of the day' />
       {props.anecdotes[selected]}
       <div>
         <p>has {points[selected]} votes</p>
       </div>
       <div>
-        <button onClick={handlePoints} >vote</button>
-        <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
+        <Button handleClick={handlePoints} text='vote' />
+        <Button handleClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))} text='next anecdote' />
       </div>
+
+      <Display title='Anecdote with most votes' />
+      <MostVotes anecdotes={anecdotes} points={points} />
+
     </div>
   )
 }

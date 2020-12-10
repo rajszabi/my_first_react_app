@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+import './index.css'
+
 
 const Display = ({ title }) => <h1>{title}</h1>
 
@@ -12,18 +14,29 @@ const Statistics = ({ good, neutral, bad }) => {
   
   return (
     <div>
-      <Statistic text='good' count={good} />
-      <Statistic text='neutral' count={neutral} />
-      <Statistic text='bad' count={bad} />
-      <Statistic text='all' count={good + neutral + bad} />
-      <Statistic text='avarage' count={Math.abs(good - bad)/(good + neutral + bad)} />
-      <Statistic text='positive' count={good/(good+neutral+bad) + '%'} />
+      <table>
+        <tbody>
+          <Statistic text='good' count={good} />
+          <Statistic text='neutral' count={neutral} />
+          <Statistic text='bad' count={bad} />
+          <Statistic text='all' count={good + neutral + bad} />
+          <Statistic text='avarage' count={Math.abs(good - bad)/(good + neutral + bad)} />
+          <Statistic text='positive' count={good/(good+neutral+bad) + '%'} />
+      </tbody>
+      </table>
     </div>
   )
   
 }
 
-const Statistic = ({ text, count}) => <p>{text} {count}</p>
+const Statistic = ({ text, count}) => { 
+  return (
+    <tr>
+      <th>{text}</th> 
+      <th>{count}</th> 
+    </tr>
+  )
+}
 
 
 const App = () => {

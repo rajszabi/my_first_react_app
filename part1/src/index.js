@@ -42,6 +42,22 @@ const Button = ({ handleClick, title }) => <button onClick={handleClick}>{title}
 //   )
 // }
 
+
+const History = ({ allClicks }) => {
+  if (allClicks.length == 0)
+  return (
+    <div>
+      <p>The app is used with the left and right buttons.</p>
+    </div>
+  )
+
+  return(
+    <div>
+      <p>{allClicks.join(' ')}</p>
+    </div>
+  )
+}
+
 const App = () => {
   const [ clicks, setClicks ] = useState({
     left : 0,
@@ -62,10 +78,14 @@ const App = () => {
   return (
     <div>
       {clicks.left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <Button handleClick={handleLeftClick} title={'Left'}/>
+      <Button handleClick={handleRightClick} title={'Right'}/>
       {clicks.right}
-      <p>{allClicks.join(' ')}</p>
+      <div>
+        <Button handleClick={() => {setAll([])
+           setClicks({left : 0, right : 0})}} title='Reset'/>
+      </div>            
+      <History allClicks={allClicks} />
     </div>
   )
 }

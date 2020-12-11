@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-const Course = (props) => {
+const Course = ({ course }) => {
   return (
     <div>
-      <Header course={props.course.name} />
-      <Content parts={props.course.parts} />
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
@@ -17,7 +18,10 @@ const Content = ({ parts }) => parts.map(part => <Part key={part.id} part={part.
 
 const Part = (props) => <p>{props.part} {props.exercise}</p>
 
-const Total = (props) => <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
+const Total = ({ parts }) => {
+  const total = parts.reduce((s, p) => ({exercises : s.exercises + p.exercises}))
+  return <p>Total of {total.exercises} exercises</p>
+}
 
 
 
@@ -41,6 +45,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
